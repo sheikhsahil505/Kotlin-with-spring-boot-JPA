@@ -7,7 +7,7 @@ import jakarta.persistence.*
 data class Employee(
     @Id
     @GeneratedValue
-    val id: Int = 0,
+    var id: Int = 0,
     var name: String = "",
     var designation: String = "",
     var mobile: String = "",

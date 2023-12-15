@@ -1,7 +1,6 @@
 package com.demo.crudKotlin.controller
 
 import com.demo.crudKotlin.dto.EmployeeDTO
-import com.demo.crudKotlin.entity.Employee
 import com.demo.crudKotlin.service.EmployeeService
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.http.HttpStatus
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/employees")
-class HomeController(val employeeService: EmployeeService) {
+ class HomeController(val employeeService: EmployeeService) {
 
     @PostMapping("/create")
     fun createEmp(@RequestBody employee: EmployeeDTO): EmployeeDTO {

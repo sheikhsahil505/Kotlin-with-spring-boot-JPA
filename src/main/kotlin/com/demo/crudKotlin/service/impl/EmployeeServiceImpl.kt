@@ -63,7 +63,7 @@ class EmployeeServiceImpl(val employeeRepo: EmployeeRepository) : EmployeeServic
         )
     }
 
-    fun mapEntityToDto(employee: Employee): EmployeeDTO {
+     fun mapEntityToDto(employee: Employee): EmployeeDTO {
         return EmployeeDTO(
             id = employee.id,
             name = employee.name,
