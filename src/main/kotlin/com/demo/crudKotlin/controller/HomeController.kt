@@ -1,6 +1,7 @@
 package com.demo.crudKotlin.controller
 
 import com.demo.crudKotlin.dto.EmployeeDTO
+import com.demo.crudKotlin.exception.UserNotFoundException
 import com.demo.crudKotlin.service.EmployeeService
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.http.HttpStatus
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController
         return try {
             val findById = employeeService.findById(id)
             ResponseEntity.ok(findById)
-        } catch (e: EntityNotFoundException) {
+        } catch (e: UserNotFoundException) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found with ID: $id")
         }
     }
@@ -38,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController
         return try {
             val updatedEmployee = employeeService.updateEmp(employee)
             ResponseEntity.ok(updatedEmployee)
-        } catch (e: EntityNotFoundException) {
+        } catch (e: UserNotFoundException) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found with ID: ${employee.id}")
         }
     }

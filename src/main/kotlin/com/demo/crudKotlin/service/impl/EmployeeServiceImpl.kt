@@ -3,9 +3,11 @@ package com.demo.crudKotlin.service.impl
 
 import com.demo.crudKotlin.dto.EmployeeDTO
 import com.demo.crudKotlin.entity.Employee
+import com.demo.crudKotlin.exception.UserNotFoundException
 import com.demo.crudKotlin.repository.EmployeeRepository
 import com.demo.crudKotlin.service.EmployeeService
 import jakarta.persistence.EntityNotFoundException
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User
 import org.springframework.stereotype.Service
 
 @Service
@@ -19,14 +21,14 @@ class EmployeeServiceImpl(val employeeRepo: EmployeeRepository) : EmployeeServic
 
 
     override fun findById(id: Int): EmployeeDTO {
-        val orElse = employeeRepo.findById(id).orElseThrow { EntityNotFoundException("Employee with id $id not found") }
+        val orElse = employeeRepo.findById(id).orElseThrow { UserNotFoundException("Employee with id $id not found") }
         return mapEntityToDto(orElse)
     }
 
     override fun updateEmp(employee: EmployeeDTO): EmployeeDTO {
         val id = employee.id
         val existingEmployee = employeeRepo.findById(id)
-            .orElseThrow { EntityNotFoundException("Employee with id $id not found") }
+            .orElseThrow { UserNotFoundException("Employee with id $id not found") }
         existingEmployee.name = employee.name
         existingEmployee.designation = employee.designation
         existingEmployee.mobile = employee.mobile
